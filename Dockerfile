@@ -1,7 +1,8 @@
 # parameters
-ARG REPO_NAME="<REPO_NAME_HERE>"
-ARG DESCRIPTION="<DESCRIPTION_HERE>"
-ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
+ARG REPO_NAME="selfdriving-portfolio-v3"
+ARG DESCRIPTION="selfdriving-portfolio-v3"
+ARG MAINTAINER="Jesse Coenraad (jessecoenraad2004@gmail.com)"
+
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
@@ -10,7 +11,7 @@ ARG ICON="cube"
 ARG ARCH
 ARG DISTRO=daffy
 ARG DOCKER_REGISTRY=docker.io
-ARG BASE_IMAGE=dt-ros-commons
+ARG BASE_IMAGE=dt-core
 ARG BASE_TAG=${DISTRO}-${ARCH}
 ARG LAUNCHER=default
 
