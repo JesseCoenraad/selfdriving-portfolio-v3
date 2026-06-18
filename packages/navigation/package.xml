@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>navigation</name>
+  <version>1.0.0</version>
+  <description>Stanley-based navigation with duckie avoidance for Duckiebot</description>
+  <maintainer email="jessecoenraad2004@gmail.com">Jesse Coenraad</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>duckietown_msgs</depend>
+  <depend>path_planning</depend>
+</package>

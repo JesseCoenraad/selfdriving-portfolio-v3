@@ -1,0 +1,16 @@
+<!-- Launches path planning and localization together -->
+<launch>
+  <arg name="veh"   default="$(env VEHICLE_NAME)" />
+  <arg name="start" default="S" />
+  <arg name="goal"  default="T" />
+
+  <include file="$(find path_planning)/launch/path_planning.launch">
+    <arg name="veh"   value="$(arg veh)" />
+    <arg name="start" value="$(arg start)" />
+    <arg name="goal"  value="$(arg goal)" />
+  </include>
+
+  <include file="$(find localization)/launch/localization.launch">
+    <arg name="veh" value="$(arg veh)" />
+  </include>
+</launch>

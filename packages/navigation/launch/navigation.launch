@@ -1,0 +1,14 @@
+<launch>
+  <arg name="veh" default="$(env VEHICLE_NAME)" />
+
+  <node
+    pkg="navigation"
+    type="navigation_node.py"
+    name="navigation_node"
+    ns="$(arg veh)"
+    output="screen"
+  >
+    <rosparam command="load"
+              file="$(find navigation)/config/params.yaml" />
+  </node>
+</launch>

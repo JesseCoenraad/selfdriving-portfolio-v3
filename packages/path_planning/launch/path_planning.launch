@@ -1,0 +1,22 @@
+<launch>
+  <arg name="veh"       default="$(env VEHICLE_NAME)" />
+  <arg name="start"     default="S" />
+  <arg name="goal"      default="T" />
+  <arg name="map_file"  default="" />
+  <arg name="auto_plan" default="true" />
+
+  <node
+    pkg="path_planning"
+    type="path_planner_node.py"
+    name="path_planner_node"
+    ns="$(arg veh)"
+    output="screen"
+  >
+    <param name="start"     value="$(arg start)" />
+    <param name="goal"      value="$(arg goal)" />
+    <param name="auto_plan" value="$(arg auto_plan)" />
+    <!-- Leave map_file empty to use the default config/map.yaml -->
+    <param if="$(eval arg('map_file') != '')"
+           name="map_file" value="$(arg map_file)" />
+  </node>
+</launch>

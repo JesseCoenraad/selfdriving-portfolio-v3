@@ -1,0 +1,5 @@
+string start
+string goal
+string[] path
+float64 cost
+bool success

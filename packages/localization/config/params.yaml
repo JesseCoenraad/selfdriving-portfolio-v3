@@ -1,0 +1,10 @@
+# Duckiebot DB21 physical parameters
+wheel_radius: 0.0318      # metres  (31.8 mm)
+baseline: 0.1             # metres  (distance between wheel contact points)
+ticks_per_rev: 135        # encoder ticks per full wheel revolution
+
+# Map parameters
+tile_size: 0.585          # metres per Duckietown tile
+
+# Node arrival threshold
+arrival_threshold: 0.15   # metres — robot is "at" a node when closer than this

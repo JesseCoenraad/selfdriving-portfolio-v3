@@ -1,0 +1,23 @@
+<!-- Full autonomous navigation stack: path planning + localisation + navigation -->
+<launch>
+  <arg name="veh"   default="$(env VEHICLE_NAME)" />
+  <arg name="start" default="S" />
+  <arg name="goal"  default="T" />
+
+  <!-- Task 1: Dijkstra path planning -->
+  <include file="$(find path_planning)/launch/path_planning.launch">
+    <arg name="veh"   value="$(arg veh)" />
+    <arg name="start" value="$(arg start)" />
+    <arg name="goal"  value="$(arg goal)" />
+  </include>
+
+  <!-- Task 2: Wheel-encoder odometry localisation -->
+  <include file="$(find localization)/launch/localization.launch">
+    <arg name="veh" value="$(arg veh)" />
+  </include>
+
+  <!-- Task 3: Stanley navigation + duckie avoidance -->
+  <include file="$(find navigation)/launch/navigation.launch">
+    <arg name="veh" value="$(arg veh)" />
+  </include>
+</launch>

@@ -1,0 +1,49 @@
+# Duckietown map configuration
+#
+# Example map (from assignment):
+#
+#   A ── B ── C ── D
+#   │       │   │
+#   E   F ── G   H
+#   │   │       │
+#   S ── I ── J ── T
+#
+# Node coordinates are in tile units (column, row), origin at S (0, 0).
+# The localization node converts tiles to meters using the tile_size parameter.
+# Edges are undirected; each entry is added in both directions by the planner.
+
+nodes:
+  - { id: S, x: 0, y: 0 }
+  - { id: I, x: 1, y: 0 }
+  - { id: J, x: 2, y: 0 }
+  - { id: T, x: 3, y: 0 }
+  - { id: E, x: 0, y: 1 }
+  - { id: F, x: 1, y: 1 }
+  - { id: G, x: 2, y: 1 }
+  - { id: H, x: 3, y: 1 }
+  - { id: A, x: 0, y: 2 }
+  - { id: B, x: 1, y: 2 }
+  - { id: C, x: 2, y: 2 }
+  - { id: D, x: 3, y: 2 }
+
+edges:
+  # Bottom row
+  - { from: S, to: I, distance: 1 }
+  - { from: I, to: J, distance: 1 }
+  - { from: J, to: T, distance: 1 }
+  # Top row
+  - { from: A, to: B, distance: 1 }
+  - { from: B, to: C, distance: 1 }
+  - { from: C, to: D, distance: 1 }
+  # Middle row (partial)
+  - { from: F, to: G, distance: 1 }
+  # Left column
+  - { from: A, to: E, distance: 1 }
+  - { from: E, to: S, distance: 1 }
+  # Column 1
+  - { from: F, to: I, distance: 1 }
+  # Column 2
+  - { from: C, to: G, distance: 1 }
+  # Right column
+  - { from: D, to: H, distance: 1 }
+  - { from: H, to: T, distance: 1 }

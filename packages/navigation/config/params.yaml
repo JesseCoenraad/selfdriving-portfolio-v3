@@ -1,0 +1,17 @@
+# Stanley controller gains
+stanley_K: 2.0       # cross-track error gain in atan term
+stanley_Kp: 4.0      # heading-error to omega gain
+
+# Speeds
+nominal_speed: 0.15  # m/s — normal forward speed
+bypass_speed: 0.08   # m/s — slow bypass when duckie won't move
+
+# Duckie avoidance
+K_avoid: 2.0         # lateral steering gain: higher = sharper swerve around duckie
+detect_every_n: 5    # run ONNX detector every N camera frames
+
+# Goal
+goal_threshold: 0.20 # metres — distance to consider goal reached
+
+# Map
+tile_size: 0.585     # metres per Duckietown tile
