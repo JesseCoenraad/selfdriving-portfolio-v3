@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>navigation</name>
+  <name>duckie_navigation</name>
   <version>1.0.0</version>
   <description>Stanley-based navigation with duckie avoidance for Duckiebot</description>
   <maintainer email="jessecoenraad2004@gmail.com">Jesse Coenraad</maintainer>

@@ -15,7 +15,9 @@ Subscribed topics:
     camera_node/image/compressed    (sensor_msgs/CompressedImage)
 
 Published topics:
-    ~car_cmd    (duckietown_msgs/Twist2DStamped)   v [m/s] + omega [rad/s]
+    car_cmd_switch_node/cmd    (duckietown_msgs/Twist2DStamped)   v [m/s] + omega [rad/s]
+                                Published directly to the switch's output topic since no
+                                FSM/car_cmd_switch source selection runs in this stack.
 
 Parameters:
     ~model_path         path to best.onnx
@@ -42,8 +44,8 @@ from geometry_msgs.msg import Pose2D
 from sensor_msgs.msg import CompressedImage
 from duckietown_msgs.msg import Twist2DStamped
 
-from navigation.stanley import StanleyController
-from navigation.duckie_detector import DuckieDetector
+from duckie_navigation.stanley import StanleyController
+from duckie_navigation.duckie_detector import DuckieDetector
 from path_planning.msg import PathPlan
 
 
@@ -90,9 +92,10 @@ class NavigationNode:
         self._duckie_info         = None
         self._frame_counter: int  = 0
 
-        # Publisher
+        # Publisher — feeds the kinematics_node input directly, bypassing the
+        # FSM-driven car_cmd_switch_node (no FSM mode is active in this stack).
         self._pub_cmd = rospy.Publisher(
-            "~car_cmd", Twist2DStamped, queue_size=1
+            "car_cmd_switch_node/cmd", Twist2DStamped, queue_size=1
         )
 
         # Subscribers
@@ -272,7 +275,7 @@ class NavigationNode:
     @staticmethod
     def _default_model_path() -> str:
         rospack = rospkg.RosPack()
-        return os.path.join(rospack.get_path("navigation"), "models", "best.onnx")
+        return os.path.join(rospack.get_path("duckie_navigation"), "models", "best.onnx")
 
 
 # ------------------------------------------------------------------

@@ -3,8 +3,8 @@
 localization_node — wheel-encoder odometry localisation on a planned path.
 
 Subscribed topics:
-  left_wheel_encoder_node/tick    (duckietown_msgs/WheelEncoderStamped)
-  right_wheel_encoder_node/tick   (duckietown_msgs/WheelEncoderStamped)
+  left_wheel_encoder_driver_node/tick    (duckietown_msgs/WheelEncoderStamped)
+  right_wheel_encoder_driver_node/tick   (duckietown_msgs/WheelEncoderStamped)
   path_planner_node/path          (path_planning/PathPlan)
 
 Published topics:
@@ -66,8 +66,8 @@ class LocalizationNode:
         self._pub_remaining = rospy.Publisher("~remaining_path", PathPlan, queue_size=1, latch=True)
 
         # --- Subscribers ---
-        rospy.Subscriber("left_wheel_encoder_node/tick",  WheelEncoderStamped, self._cb_left)
-        rospy.Subscriber("right_wheel_encoder_node/tick", WheelEncoderStamped, self._cb_right)
+        rospy.Subscriber("left_wheel_encoder_driver_node/tick",  WheelEncoderStamped, self._cb_left)
+        rospy.Subscriber("right_wheel_encoder_driver_node/tick", WheelEncoderStamped, self._cb_right)
         rospy.Subscriber("path_planner_node/path",        PathPlan,            self._cb_path)
 
         rospy.loginfo(f"[{self.node_name}] Ready. "

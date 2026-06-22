@@ -17,7 +17,7 @@
   </include>
 
   <!-- Task 3: Stanley navigation + duckie avoidance -->
-  <include file="$(find navigation)/launch/navigation.launch">
+  <include file="$(find duckie_navigation)/launch/navigation.launch">
     <arg name="veh" value="$(arg veh)" />
   </include>
 </launch>

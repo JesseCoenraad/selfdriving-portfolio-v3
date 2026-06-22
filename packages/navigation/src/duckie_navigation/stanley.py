@@ -85,7 +85,7 @@ class StanleyController:
 
         # Stanley formula
         v_eff = max(abs(v), self._v_min)
-        delta = heading_err + math.atan2(self._K * cte, v_eff)
+        delta = heading_err - math.atan2(self._K * cte, v_eff)
         omega = self._Kp * delta
         omega = max(-self._max_omega, min(self._max_omega, omega))
 

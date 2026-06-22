@@ -1,6 +1,6 @@
 # Stanley controller gains
-stanley_K: 2.0       # cross-track error gain in atan term
-stanley_Kp: 4.0      # heading-error to omega gain
+stanley_K: 0.5       # cross-track error gain in atan term
+stanley_Kp: 2.0      # heading-error to omega gain
 
 # Speeds
 nominal_speed: 0.15  # m/s — normal forward speed

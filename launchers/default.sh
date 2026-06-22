@@ -17,7 +17,7 @@ START_NODE="${START_NODE:-S}"
 GOAL_NODE="${GOAL_NODE:-T}"
 
 # launching app: path planning (task 1) + localization (task 2) + navigation (task 3)
-dt-exec roslaunch --wait navigation full_system.launch \
+dt-exec roslaunch --wait duckie_navigation full_system.launch \
   start:="${START_NODE}" goal:="${GOAL_NODE}"
 
 
