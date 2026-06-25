@@ -15,9 +15,9 @@ Subscribed topics:
     camera_node/image/compressed    (sensor_msgs/CompressedImage)
 
 Published topics:
-    car_cmd_switch_node/cmd    (duckietown_msgs/Twist2DStamped)   v [m/s] + omega [rad/s]
-                                Published directly to the switch's output topic since no
-                                FSM/car_cmd_switch source selection runs in this stack.
+    ~car_cmd    (duckietown_msgs/Twist2DStamped)   desired v [m/s] + omega [rad/s]
+                 Setpoint only — task 4's control_node (duckie_control) applies PID
+                 speed correction and publishes the final command to the actuator.
 
 Parameters:
     ~model_path         path to best.onnx
@@ -92,10 +92,10 @@ class NavigationNode:
         self._duckie_info         = None
         self._frame_counter: int  = 0
 
-        # Publisher — feeds the kinematics_node input directly, bypassing the
-        # FSM-driven car_cmd_switch_node (no FSM mode is active in this stack).
+        # Publisher — desired (uncorrected) v/omega. control_node (task 4) applies
+        # PID speed correction and republishes the final command to the actuator.
         self._pub_cmd = rospy.Publisher(
-            "car_cmd_switch_node/cmd", Twist2DStamped, queue_size=1
+            "~car_cmd", Twist2DStamped, queue_size=1
         )
 
         # Subscribers

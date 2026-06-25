@@ -16,7 +16,7 @@ dt-launchfile-init
 START_NODE="${START_NODE:-S}"
 GOAL_NODE="${GOAL_NODE:-T}"
 
-# launching app: path planning (task 1) + localization (task 2) + navigation (task 3)
+# launching app: path planning (task 1) + localization (task 2) + navigation (task 3) + control (task 4)
 dt-exec roslaunch --wait duckie_navigation full_system.launch \
   start:="${START_NODE}" goal:="${GOAL_NODE}"
 

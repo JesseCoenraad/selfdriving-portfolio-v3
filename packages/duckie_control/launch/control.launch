@@ -1,0 +1,14 @@
+<launch>
+  <arg name="veh" default="$(env VEHICLE_NAME)" />
+
+  <node
+    pkg="duckie_control"
+    type="control_node.py"
+    name="control_node"
+    ns="$(arg veh)"
+    output="screen"
+  >
+    <rosparam command="load"
+              file="$(find duckie_control)/config/params.yaml" />
+  </node>
+</launch>

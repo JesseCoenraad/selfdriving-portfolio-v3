@@ -1,0 +1,12 @@
+# Speed PID gains
+Kp: 1.0
+Ki: 0.5
+Kd: 0.05
+
+# Correction clamp (anti-windup / saturation on the PID term itself)
+max_correction: 0.10   # m/s
+integral_limit: 0.5
+
+# Final speed envelope sent to the wheels
+v_min: 0.0
+v_max: 0.30

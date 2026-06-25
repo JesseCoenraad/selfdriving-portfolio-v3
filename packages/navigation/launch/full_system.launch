@@ -1,4 +1,4 @@
-<!-- Full autonomous navigation stack: path planning + localisation + navigation -->
+<!-- Full autonomous navigation stack: path planning + localisation + navigation + control -->
 <launch>
   <arg name="veh"   default="$(env VEHICLE_NAME)" />
   <arg name="start" default="S" />
@@ -18,6 +18,11 @@
 
   <!-- Task 3: Stanley navigation + duckie avoidance -->
   <include file="$(find duckie_navigation)/launch/navigation.launch">
+    <arg name="veh" value="$(arg veh)" />
+  </include>
+
+  <!-- Task 4: PID speed control (final stage before actuation) -->
+  <include file="$(find duckie_control)/launch/control.launch">
     <arg name="veh" value="$(arg veh)" />
   </include>
 </launch>
