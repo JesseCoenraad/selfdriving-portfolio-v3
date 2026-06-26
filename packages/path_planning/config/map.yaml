@@ -1,16 +1,17 @@
 # Duckietown map configuration
 #
-# Example map (from assignment):
+# Assignment map:
 #
 #   A ── B ── C ── D
-#   │       │   │
-#   E   F ── G   H
-#   │   │       │
+#   │         │    │
+#   E    F ── G    H
+#   │    │         │
 #   S ── I ── J ── T
 #
 # Node coordinates are in tile units (column, row), origin at S (0, 0).
 # The localization node converts tiles to meters using the tile_size parameter.
 # Edges are undirected; each entry is added in both directions by the planner.
+# Every edge connects two adjacent tiles, so every edge weight is 1.
 
 nodes:
   - { id: S, x: 0, y: 0 }

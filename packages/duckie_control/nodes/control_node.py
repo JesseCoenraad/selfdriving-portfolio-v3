@@ -21,10 +21,14 @@ Published topics:
                                  Final command to the actuator (see navigation_node's docstring).
 
 Parameters:
-    ~Kp, ~Ki, ~Kd        PID gains                              (default 1.0, 0.5, 0.05)
+    ~Kp, ~Ki, ~Kd        PID gains                              (default 1.0, 0.5, 0.0)
     ~max_correction      clamp on the PID correction term [m/s] (default 0.10)
     ~integral_limit      anti-windup clamp on the integral term (default 0.5)
     ~v_min, ~v_max       final speed envelope sent to the wheels (default 0.0, 0.30)
+    ~min_dt              minimum time between speed updates [s] (default 0.05)
+                          Pose2D has no timestamp, so dt comes from wall-clock
+                          callback arrival time — below this floor the speed
+                          estimate (distance / dt) is dominated by jitter noise.
 """
 
 import math
@@ -42,11 +46,12 @@ class ControlNode:
 
         Kp = float(rospy.get_param("~Kp", 1.0))
         Ki = float(rospy.get_param("~Ki", 0.5))
-        Kd = float(rospy.get_param("~Kd", 0.05))
+        Kd = float(rospy.get_param("~Kd", 0.0))
         max_correction = float(rospy.get_param("~max_correction", 0.10))
         integral_limit = float(rospy.get_param("~integral_limit", 0.5))
         self._v_min = float(rospy.get_param("~v_min", 0.0))
         self._v_max = float(rospy.get_param("~v_max", 0.30))
+        self._min_dt = float(rospy.get_param("~min_dt", 0.05))
 
         self._pid = PIDController(
             Kp, Ki, Kd,
@@ -85,7 +90,10 @@ class ControlNode:
             return
 
         dt = (now - self._prev_pose_time).to_sec()
-        if dt <= 0.0:
+        if dt < self._min_dt:
+            # Too little wall-clock time has passed since the last sample to
+            # get a reliable speed estimate — wait for it to accumulate
+            # instead of dividing by a noise-dominated dt.
             return
 
         v_measured = math.hypot(msg.x - self._prev_pose.x, msg.y - self._prev_pose.y) / dt

@@ -1,11 +1,20 @@
 # Speed PID gains
 Kp: 1.0
 Ki: 0.5
-Kd: 0.05
+# Kd disabled: Pose2D carries no timestamp, so dt is measured from wall-clock
+# callback arrival time. On real hardware (network/CPU jitter, irregular
+# encoder callback timing) that makes the finite-difference derivative of an
+# already-noisy speed estimate spike badly. PI alone is plenty for this loop.
+Kd: 0.0
 
 # Correction clamp (anti-windup / saturation on the PID term itself)
 max_correction: 0.10   # m/s
 integral_limit: 0.5
+
+# Minimum time between speed-update steps. Pose callbacks fire on every
+# encoder tick, which can arrive in tight bursts on real hardware; below
+# this dt the speed estimate (distance / dt) is dominated by noise.
+min_dt: 0.05   # s
 
 # Final speed envelope sent to the wheels
 v_min: 0.0
